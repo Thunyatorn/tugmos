@@ -1,13 +1,16 @@
 import { ScoreCard, IScoreCard } from "./ScoreCard";
+import { ScoreCard2 } from "./ScoreCard2";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ScoreCard2 } from "./ScoreCard2";
-import { object } from "zod";
 
 interface IContestant {
   name?: string;
   score?: number;
+}
+
+interface IIContestant {
+  data?: IContestant[];
 }
 
 interface IScoreTable {
@@ -16,7 +19,7 @@ interface IScoreTable {
 }
 
 export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
-  let default_contestant_content: IContestant[] = [];
+  const default_contestant_content: IContestant[] = [];
   const error_value = 192038403233;
   for (let i = 1; i <= 10; ++i) {
     default_contestant_content.push({
@@ -27,15 +30,17 @@ export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
   const [data, setData] = useState<IContestant[]>(default_contestant_content);
 
   useEffect(() => {
-    axios.get(URL).then((res) => {
-      setData(res.data.data);
-    });
+    const fetchData = async () => {
+      const res = await axios.get(URL);
+      const resData = res.data as IIContestant;
+      const resDataData = resData.data!;
+      setData(resDataData);
+    };
+    fetchData();
 
     const interval = setInterval(() => {
-      axios.get(URL).then((res) => {
-        setData(res.data.data);
-      });
-      console.log(data);
+      fetchData();
+      // console.log(data);
     }, 1000);
     return () => clearInterval(interval);
   }, []);

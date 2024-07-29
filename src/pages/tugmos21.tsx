@@ -1,8 +1,8 @@
 import Head from "next/head";
 
 import { ScoreTable } from "../components/ScoreTable";
-import { Timer } from "~/components/Timer";
 import { ScoreTable2 } from "~/components/ScoreTable2";
+import { Timer } from "~/components/Timer";
 
 export default function Home() {
   return (
