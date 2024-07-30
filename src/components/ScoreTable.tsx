@@ -2,6 +2,7 @@ import { ScoreCard, IScoreCard } from "./ScoreCard";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 interface IContestant {
   name?: string;
@@ -26,28 +27,39 @@ export const ScoreTable = ({ URL, color }: IScoreTable) => {
       score: error_value,
     });
   }
-  const [data, setData] = useState<IContestant[]>(default_contestant_content);
+  // const [data, setData] = useState<IContestant[]>(default_contestant_content);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const { data } = useQuery({
+    queryKey: ["res"],
+    queryFn: async () => {
       const res = await axios.get(URL);
       const resData = res.data as IIContestant;
       const resDataData = resData.data!;
-      setData(resDataData);
-    };
-    fetchData();
+      // setData(resDataData);
+      return resDataData;
+    },
+  });
 
-    const interval = setInterval(() => {
-      fetchData();
-      // console.log(data);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await axios.get(URL);
+  //     const resData = res.data as IIContestant;
+  //     const resDataData = resData.data!;
+  //     setData(resDataData);
+  //   };
+  //   fetchData();
+
+  //   const interval = setInterval(() => {
+  //     fetchData();
+  // console.log(data);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div className="flex w-full justify-center">
       <div className="mt-14 flex w-3/4 flex-wrap justify-center gap-x-12 gap-y-10">
-        {data.map((item, idx) => (
+        {data?.map((item, idx) => (
           <ScoreCard
             key={idx}
             name={item.name!}
