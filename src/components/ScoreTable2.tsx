@@ -39,6 +39,7 @@ export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
       // setData(resDataData);
       return resDataData;
     },
+    refetchInterval: 1000,
   });
 
   // useEffect(() => {
