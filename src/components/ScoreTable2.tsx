@@ -3,6 +3,7 @@ import { ScoreCard2 } from "./ScoreCard2";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 interface IContestant {
   name?: string;
@@ -27,37 +28,81 @@ export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
       score: error_value,
     });
   }
-  const [data, setData] = useState<IContestant[]>(default_contestant_content);
+  // const [data, setData] = useState<IContestant[]>(default_contestant_content);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const { data } = useQuery({
+    queryKey: ["res"],
+    queryFn: async () => {
       const res = await axios.get(URL);
       const resData = res.data as IIContestant;
       const resDataData = resData.data!;
-      setData(resDataData);
-    };
-    fetchData();
+      // setData(resDataData);
+      return resDataData;
+    },
+  });
 
-    const interval = setInterval(() => {
-      fetchData();
-      // console.log(data);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await axios.get(URL);
+  //     const resData = res.data as IIContestant;
+  //     const resDataData = resData.data!;
+  //     setData(resDataData);
+  //   };
+  //   fetchData();
+
+  //   const interval = setInterval(() => {
+  //     fetchData();
+  // console.log(data);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
-    <div className="flex w-full justify-center">
-      <div className="mx-12 grid w-full grid-cols-4 justify-center gap-x-12 gap-y-10">
-        {data.map((item, idx) => (
-          <ScoreCard2
-            key={idx}
-            name={item.name!}
-            score={item.score!}
-            is_skeleton={item.name === "" && item.score === error_value}
-            color={color}
-            className={idx === 8 ? "col-start-2" : undefined}
-          />
-        ))}
+    <div className="flex w-full">
+      {/* between */}
+      <div className="hidden w-full justify-center sm:flex md:hidden">
+        <div className="mx-12 grid w-full grid-cols-2 justify-center gap-x-12 gap-y-10">
+          {data?.map((item, idx) => (
+            <ScoreCard2
+              key={idx}
+              name={item.name!}
+              score={item.score!}
+              is_skeleton={item.name === "" && item.score === error_value}
+              color={color}
+              // className={idx === 8 ? "col-start-2" : undefined}
+            />
+          ))}
+        </div>
+      </div>
+      {/* desktop */}
+      <div className="hidden w-full justify-center md:flex">
+        <div className="mx-12 grid w-full grid-cols-4 justify-center gap-x-12 gap-y-10">
+          {data?.map((item, idx) => (
+            <ScoreCard2
+              key={idx}
+              name={item.name!}
+              score={item.score!}
+              is_skeleton={item.name === "" && item.score === error_value}
+              color={color}
+              className={idx === 8 ? "col-start-2" : undefined}
+            />
+          ))}
+        </div>
+      </div>
+      {/* mobile */}
+      <div className="flex w-full justify-center sm:hidden">
+        <div className="mx-16 grid w-full grid-cols-1 justify-center gap-x-12 gap-y-10">
+          {data?.map((item, idx) => (
+            <ScoreCard2
+              key={idx}
+              name={item.name!}
+              score={item.score!}
+              is_skeleton={item.name === "" && item.score === error_value}
+              color={color}
+              // className={idx === 8 ? "col-start-2" : undefined}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

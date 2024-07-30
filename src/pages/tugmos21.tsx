@@ -12,7 +12,10 @@ export default function Home() {
         <link rel="icon" href="/tugmos21.ico" />
       </Head>
       <div className="flex w-full flex-col items-center py-6">
-        <h1 className="text-5xl font-bold dark:text-slate-300">
+        <h1 className="hidden text-center text-5xl font-bold md:flex dark:text-slate-300">
+          TUGMOs 21th Live Scoreboard
+        </h1>
+        <h1 className="mx-4 flex text-center text-5xl font-bold md:hidden dark:text-slate-300">
           TUGMOs 21th Live Scoreboard
         </h1>
         <Timer />

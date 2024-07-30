@@ -40,8 +40,19 @@ export const Timer = () => {
   nowTime = ~~(nowTime / 60);
   const hours = nowTime;
   return (
-    <div className="flex items-center justify-center py-24 text-9xl text-slate-50">
-      {dateToTime(hours, minutes, seconds)}
+    <div className="flex">
+      {/* between */}
+      <div className="hidden items-center justify-center py-24 text-8xl text-slate-50 sm:flex md:hidden">
+        {dateToTime(hours, minutes, seconds)}
+      </div>
+      {/* desktop */}
+      <div className="hidden items-center justify-center py-24 text-9xl text-slate-50 md:flex">
+        {dateToTime(hours, minutes, seconds)}
+      </div>
+      {/* mobile */}
+      <div className="flex items-center justify-center py-24 text-5xl text-slate-50 sm:hidden">
+        {dateToTime(hours, minutes, seconds)}
+      </div>
     </div>
   );
 };
