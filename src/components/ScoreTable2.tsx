@@ -28,35 +28,35 @@ export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
       score: error_value,
     });
   }
-  // const [data, setData] = useState<IContestant[]>(default_contestant_content);
+  const [data, setData] = useState<IContestant[]>(default_contestant_content);
 
-  const { data } = useQuery({
-    queryKey: ["res"],
-    queryFn: async () => {
-      const res = await axios.get(URL);
-      const resData = res.data as IIContestant;
-      const resDataData = resData.data!;
-      // setData(resDataData);
-      return resDataData;
-    },
-    refetchInterval: 1000,
-  });
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
+  // const { data } = useQuery({
+  //   queryKey: ["res"],
+  //   queryFn: async () => {
   //     const res = await axios.get(URL);
   //     const resData = res.data as IIContestant;
   //     const resDataData = resData.data!;
-  //     setData(resDataData);
-  //   };
-  //   fetchData();
+  //     // setData(resDataData);
+  //     return resDataData;
+  //   },
+  //   refetchInterval: 1000,
+  // });
 
-  //   const interval = setInterval(() => {
-  //     fetchData();
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(URL);
+      const resData = res.data as IIContestant;
+      const resDataData = resData.data!;
+      setData(resDataData);
+    };
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
   // console.log(data);
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, []);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="flex w-full">
