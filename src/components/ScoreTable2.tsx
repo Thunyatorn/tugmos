@@ -19,6 +19,8 @@ interface IScoreTable {
   color: IScoreCard["color"];
 }
 
+const endDate = new Date("2024-08-14T09:15:00.000Z");
+
 export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
   const default_contestant_content: IContestant[] = [];
   const error_value = 192038403233;
@@ -28,35 +30,37 @@ export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
       score: error_value,
     });
   }
-  const [data, setData] = useState<IContestant[]>(default_contestant_content);
+  // const [data, setData] = useState<IContestant[]>(default_contestant_content);
 
-  // const { data } = useQuery({
-  //   queryKey: ["res"],
-  //   queryFn: async () => {
-  //     const res = await axios.get(URL);
-  //     const resData = res.data as IIContestant;
-  //     const resDataData = resData.data!;
-  //     // setData(resDataData);
-  //     return resDataData;
-  //   },
-  //   refetchInterval: 1000,
-  // });
-
-  useEffect(() => {
-    const fetchData = async () => {
+  const { data } = useQuery({
+    queryKey: ["res"],
+    queryFn: async () => {
       const res = await axios.get(URL);
       const resData = res.data as IIContestant;
       const resDataData = resData.data!;
-      setData(resDataData);
-    };
-    fetchData();
+      // setData(resDataData);
+      // return resDataData;
+      return (endDate.getTime() - (new Date()).getTime() <= 15 * (1000 * 60)) ? default_contestant_content : resDataData;
+    },
+    refetchInterval: 1000,
+    initialData: default_contestant_content
+  });
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await axios.get(URL);
+  //     const resData = res.data as IIContestant;
+  //     const resDataData = resData.data!;
+  //     setData(resDataData);
+  //   };
+  //   fetchData();
 
-    const interval = setInterval(() => {
-      fetchData();
-  // console.log(data);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  //   const interval = setInterval(() => {
+  //     fetchData();
+  // // console.log(data);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div className="flex w-full">

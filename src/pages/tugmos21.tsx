@@ -13,10 +13,10 @@ export default function Home() {
       </Head>
       <div className="flex w-full flex-col items-center py-6">
         <h1 className="hidden text-center text-5xl font-bold md:flex dark:text-slate-300">
-          TUGMOs 21th Live Scoreboard
+          TUGMOs 21st Live Scoreboard
         </h1>
         <h1 className="mx-4 flex text-center text-5xl font-bold md:hidden dark:text-slate-300">
-          TUGMOs 21th Live Scoreboard
+          TUGMOs 21st Live Scoreboard
         </h1>
         <Timer />
         <ScoreTable2 URL={process.env.NEXT_PUBLIC_TUGMOS21!} color={"yellow"} />
