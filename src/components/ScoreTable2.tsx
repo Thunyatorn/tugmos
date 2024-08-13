@@ -4,6 +4,7 @@ import { ScoreCard2 } from "./ScoreCard2";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { endDate } from "./Timer";
 
 interface IContestant {
   name?: string;
@@ -18,8 +19,6 @@ interface IScoreTable {
   URL: string;
   color: IScoreCard["color"];
 }
-
-const endDate = new Date("2024-08-14T09:15:00.000Z");
 
 export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
   const default_contestant_content: IContestant[] = [];
