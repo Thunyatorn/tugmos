@@ -20,8 +20,6 @@ interface IScoreTable {
   color: IScoreCard["color"];
 }
 
-export const valid = (endDate.getTime() - (new Date()).getTime() <= 10 * (1000 * 60));
-
 export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
   const default_contestant_content: IContestant[] = [];
   const error_value = 192038403233;
@@ -41,7 +39,7 @@ export const ScoreTable2 = ({ URL, color }: IScoreTable) => {
       const resDataData = resData.data!;
       // setData(resDataData);
       // return resDataData;
-      return valid ? default_contestant_content : resDataData;
+      return (endDate.getTime() - (new Date()).getTime() <= 10 * (1000 * 60)) ? default_contestant_content : resDataData;
     },
     refetchInterval: 1000,
     initialData: default_contestant_content

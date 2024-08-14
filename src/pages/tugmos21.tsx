@@ -4,7 +4,6 @@ import { ScoreTable } from "../components/ScoreTable";
 import { ScoreTable2 } from "~/components/ScoreTable2";
 import { Timer } from "~/components/Timer";
 import { endDate } from "~/components/Timer";
-import { valid } from "~/components/ScoreTable2";
 
 export default function Home() {
   return (
