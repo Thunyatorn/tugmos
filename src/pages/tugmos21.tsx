@@ -4,6 +4,7 @@ import { ScoreTable } from "../components/ScoreTable";
 import { ScoreTable2 } from "~/components/ScoreTable2";
 import { Timer } from "~/components/Timer";
 import { endDate } from "~/components/Timer";
+import { valid } from "~/components/ScoreTable2";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
         </h1>
         <Timer />
         {/* <ScoreTable2 URL={process.env.NEXT_PUBLIC_TUGMOS21!} color={"yellow"} /> */}
-        <ScoreTable2 URL={(endDate.getTime() - (new Date()).getTime() <= 15 * (1000 * 60)) ? (process.env.NEXT_PUBLIC_TUGMOS21_2!) : (process.env.NEXT_PUBLIC_TUGMOS21!)} color={"yellow"} />
+        <ScoreTable2 URL={process.env.NEXT_PUBLIC_TUGMOS21!} color={"yellow"} />
       </div>
     </>
   );
