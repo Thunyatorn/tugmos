@@ -7,8 +7,9 @@ const card = cva("flex flex-col rounded-lg border p-4 shadow-md", {
       purple:
         "border-purple-700 bg-purple-100 text-purple-950 dark:bg-purple-200 [&>p]:text-purple-700",
       yellow:
-        "border-yellow-700 bg-yellow-200 text-orange-600 dark:bg-yellow-200 [&>p]:text-orange-500",
-    },
+        // "border-yellow-700 bg-yellow-200 text-orange-600 dark:bg-yellow-200 [&>p]:text-orange-500",
+        "border-yellow-700 bg-yellow-200 text-black dark:bg-yellow-200 [&>p]:text-black",
+      },
   },
   defaultVariants: {
     color: "purple",

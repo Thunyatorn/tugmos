@@ -8,7 +8,8 @@ const gauge = cva("absolute h-1.5 rounded-full", {
   variants: {
     color: {
       purple: "bg-purple-500",
-      yellow: "bg-yellow-500",
+      // yellow: "bg-yellow-500",
+      yellow: "bg-black",
     },
   },
   defaultVariants: {
