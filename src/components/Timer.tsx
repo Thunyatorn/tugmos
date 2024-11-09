@@ -18,7 +18,8 @@ const dateToTime = (hours: number, minutes: number, seconds: number) => {
 };
 
 const startDate = new Date("2024-08-14T07:45:00.000Z");
-export const endDate = new Date("2024-08-14T09:15:00.000Z");
+// export const endDate = new Date("2024-08-14T09:15:00.000Z");
+export const endDate = new Date("2100-08-14T09:15:00.000Z");
 
 export const Timer = () => {
   const [time, setTime] = useState(0);
